@@ -39,7 +39,7 @@ class Game extends Component{
             let children = []
             let data = structure[i]
             for (let j = 0; j < data.length; j++) {
-                children.push(<button onClick={this.playCard(data[j][1])}>{data[j][0]}</button>)
+                children.push(<button onClick={() => this.playCard(data[j][1])}>{data[j][0]}</button>)
           }
           table.push(<p>{children}</p>)
         }
@@ -52,9 +52,7 @@ class Game extends Component{
 
     render(){
         return(
-                <div class="btn-group">
-                    <center>{this.createTable()}</center>
-                </div>
+            <center>{this.createTable()}</center>
         );
     }
 }
