@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Layout, Menu } from 'antd';
+import {Link} from 'react-router-dom';
 import logo from '../Assets/Drink.png';
 import "antd/dist/antd.css";
 
@@ -11,9 +12,10 @@ class CustomLayout extends Component{
             <Layout className="layout">
                 <Header>
                     <Menu theme="dark" mode="horizontal" style={{ lineHeight: '64px' }}>
-                        <Menu.Item><img alt="Movie" src={logo} height="60px" /></Menu.Item>
-                        <Menu.Item key="1">Inicio</Menu.Item>
-                        <Menu.Item key="2">Estadisticas</Menu.Item>
+                        <Menu.Item><Link to="/"><img alt="Movie" src={logo} height="60px" /></Link></Menu.Item>
+                        <Menu.Item key="1"><Link to="/">Inicio</Link></Menu.Item>
+                        <Menu.Item key="2"><Link to="/game">Juego</Link></Menu.Item>
+                        <Menu.Item key="3"><Link to="/">Estadisticas</Link></Menu.Item>
                     </Menu>
                 </Header>
             </Layout>
