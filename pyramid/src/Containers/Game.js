@@ -25,7 +25,7 @@ class Game extends Component{
         const structure_array = []
         for (let index = height; index > 0; index--) {
             // Get Random card associated
-            const randomCard = this.state.card_list[Math.floor(Math.random()*this.state.card_list.length)];
+            let randomCard = this.state.card_list[Math.floor(Math.random()*this.state.card_list.length)];
             const data = new Array(index).fill(["X",randomCard])
             structure_array.push(data)
         }
@@ -47,7 +47,17 @@ class Game extends Component{
     }
     
     playCard(card){
-        console.log(card)
+        const drink_users = []
+        this.state.users.forEach(user => {
+            if (user.cards.includes(card)) {
+                drink_users.push(user.name)
+            }
+        });
+        if (drink_users.length > 0) {
+            alert("Beben: " + drink_users)
+        }else{
+            alert("Nadie bebe")
+        }
     }
 
     render(){
