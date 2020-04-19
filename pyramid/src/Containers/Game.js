@@ -5,6 +5,7 @@ class Game extends Component{
     constructor(state){
         super(state)
         this.state = {
+            card_list: ["A","2","3","4","5","6","7","8","9","10","J","Q","K"],
             users: [],
             pyramid_height: 1,
             number_users: 1,
@@ -23,7 +24,9 @@ class Game extends Component{
         const height = pyramid_height;
         const structure_array = []
         for (let index = height; index > 0; index--) {
-            const data = new Array(index).fill("X")
+            // Get Random card associated
+            const randomCard = this.state.card_list[Math.floor(Math.random()*this.state.card_list.length)];
+            const data = new Array(index).fill(["X",randomCard])
             structure_array.push(data)
         }
         this.setState({structure: structure_array})
@@ -33,23 +36,25 @@ class Game extends Component{
         let table = []
         let structure = this.state.structure;
         for (let i = 0; i < structure.length; i++) {
-          let children = []
-          let data = structure[i]
-          for (let j = 0; j < data.length; j++) {
-            children.push(<td><button>{data[j]}</button></td>)
+            let children = []
+            let data = structure[i]
+            for (let j = 0; j < data.length; j++) {
+                children.push(<button onClick={this.playCard(data[j][1])}>{data[j][0]}</button>)
           }
-          table.push(<tr>{children}</tr>)
+          table.push(<p>{children}</p>)
         }
         return table
+    }
+    
+    playCard(card){
+        console.log(card)
     }
 
     render(){
         return(
-            <div>
-                <center><table>
-                    {this.createTable()}
-                </table></center>
-            </div>
+                <div class="btn-group">
+                    <center>{this.createTable()}</center>
+                </div>
         );
     }
 }
