@@ -14,8 +14,9 @@ class CustomLayout extends Component{
                     <Menu theme="dark" mode="horizontal" style={{ lineHeight: '64px' }}>
                         <Menu.Item><Link to="/"><img alt="Movie" src={logo} height="60px" /></Link></Menu.Item>
                         <Menu.Item key="1"><Link to="/">Inicio</Link></Menu.Item>
-                        <Menu.Item key="2"><Link to="/game">Juego</Link></Menu.Item>
-                        <Menu.Item key="3"><Link to="/">Estadisticas</Link></Menu.Item>
+                        <Menu.Item key="2"><Link to="/setup-game">Iniciar Juego</Link></Menu.Item>
+                        <Menu.Item key="3"><Link to="/game">Juego</Link></Menu.Item>
+                        <Menu.Item key="4"><Link to="/">Estadisticas</Link></Menu.Item>
                     </Menu>
                 </Header>
             </Layout>

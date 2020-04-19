@@ -22,10 +22,15 @@ class SetupGame extends Component {
     required = value => (value ? undefined : 'Required')
 
     onSubmit = (values) => {
-        console.log("START GAME")
         this.setState({
             pyramid_height : values.pyramid_height
         })
+        // Save Data on Local Storage
+        localStorage.setItem("pyramid_height",values.pyramid_height)
+        localStorage.setItem("number_users",this.state.number_users)
+        const users_data = JSON.stringify(this.state.users);
+        localStorage.setItem("users",users_data)
+        alert("START GAME");
     }
 
     // Dynamic form to add users
@@ -98,7 +103,7 @@ class SetupGame extends Component {
                         <Field
                             name="pyramid_height"
                             component="input"
-                            type="text"
+                            type="number"
                             placeholder="Ingrese altura de pirámide"
                             validate={this.required}
                         />
