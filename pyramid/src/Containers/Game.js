@@ -28,11 +28,27 @@ class Game extends Component{
         }
         this.setState({structure: structure_array})
     }
+    
+    createTable(){
+        let table = []
+        let structure = this.state.structure;
+        for (let i = 0; i < structure.length; i++) {
+          let children = []
+          let data = structure[i]
+          for (let j = 0; j < data.length; j++) {
+            children.push(<td><button>{data[j]}</button></td>)
+          }
+          table.push(<tr>{children}</tr>)
+        }
+        return table
+    }
 
     render(){
         return(
             <div>
-                <p>{this.state.pyramid_height}</p>
+                <center><table>
+                    {this.createTable()}
+                </table></center>
             </div>
         );
     }
