@@ -77,8 +77,6 @@ class Wizard extends Component {
                 </button>
               )}
             </div>
-
-            <pre>{JSON.stringify(values, 0, 2)}</pre>
           </form>
         )}
       </Form>
