@@ -3,6 +3,9 @@ import { render } from 'react-dom';
 import Styles from '../Assets/Styles';
 import { Field } from 'react-final-form';
 import Wizard from '../Components/Wizard';
+import { Form, Input, Icon, Button } from 'antd';
+
+let id = 0
 
 class SetupGame extends Component {
 
@@ -14,6 +17,9 @@ class SetupGame extends Component {
             pyramid_height : 0
         }
     }
+
+    // Wizard functions
+    // https://codesandbox.io/s/km2n35kq3v?file=/index.js
 
     sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
     required = value => (value ? undefined : 'Required')
