@@ -11,7 +11,7 @@ class SetupGame extends Component {
             card_list: ["A","2","3","4","5","6","7","8","9","10","J","Q","K"],
             number_users : 1,
             pyramid_height : 0,
-            users: [{ name: "", cards: ["",""] }]
+            users: [{ name: "", cards: ["",""], drinks: 0 }]
         }
     }
 
@@ -27,9 +27,14 @@ class SetupGame extends Component {
         })
         // Save Data on Local Storage
         localStorage.setItem("pyramid_height",values.pyramid_height)
-        localStorage.setItem("number_users",this.state.number_users)
-        const users_data = JSON.stringify(this.state.users);
-        localStorage.setItem("users",users_data)
+        // Save individual user drinks to easy access and set value
+        const users_data = this.state.users
+        users_data.forEach(user => {
+            localStorage.setItem(user["name"]+"_drinks",user["drinks"])
+        });
+        // Save All users in one to get total data
+        const users_all_data = JSON.stringify(this.state.users);
+        localStorage.setItem("users",users_all_data)
         alert("START GAME");
     }
 
@@ -41,7 +46,7 @@ class SetupGame extends Component {
         const randomCard2 = this.state.card_list[Math.floor(Math.random()*this.state.card_list.length)];
         const newUsers = this.state.users.map((user, sidx) => {
             if (idx !== sidx) return user;
-            return { ...user, name: evt.target.value, cards: [randomCard1,randomCard2] };
+            return { ...user, name: evt.target.value, cards: [randomCard1,randomCard2], drinks: 0 };
         });
 
         this.setState({ users: newUsers });
@@ -51,14 +56,12 @@ class SetupGame extends Component {
         const randomCard1 = this.state.card_list[Math.floor(Math.random()*this.state.card_list.length)];
         const randomCard2 = this.state.card_list[Math.floor(Math.random()*this.state.card_list.length)];
         this.setState({
-            number_users: this.state.number_users + 1,
-            users: this.state.users.concat([{ name: "", cards: [randomCard1,randomCard2] }])
+            users: this.state.users.concat([{ name: "", cards: [randomCard1,randomCard2], drinks: 0 }])
         });
     };
 
     handleRemoveUser = idx => () => {
         this.setState({
-            number_users: this.state.number_users - 1,
             users: this.state.users.filter((s, sidx) => idx !== sidx)
         });
     };

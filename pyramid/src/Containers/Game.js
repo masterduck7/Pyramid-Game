@@ -8,15 +8,13 @@ class Game extends Component{
             card_list: ["A","2","3","4","5","6","7","8","9","10","J","Q","K"],
             users: [],
             pyramid_height: 1,
-            number_users: 1,
             structure: []
         }
     }
     
     componentDidMount(){
-        this.setState({users: JSON.parse(localStorage.getItem("users"))});
         this.setState({pyramid_height: JSON.parse(localStorage.getItem("pyramid_height"))});
-        this.setState({number_users : JSON.parse(localStorage.getItem("number_users"))});
+        this.setState({users: JSON.parse(localStorage.getItem("users"))});
         this.setStructure(JSON.parse(localStorage.getItem("pyramid_height")));
     }
 
@@ -55,10 +53,12 @@ class Game extends Component{
         this.state.users.forEach(user => {
             if (user.cards.includes(card)) {
                 drink_users.push(user.name)
+                const drinks_user = localStorage.getItem(user.name+"_drinks")
+                localStorage.setItem(user.name+"_drinks", parseInt(drinks_user) + 1)
             }
         });
         if (drink_users.length > 0) {
-            alert("Beben: " + drink_users)
+            alert("Beben: " + drink_users.join(", "))
         }else{
             alert("Nadie bebe")
         }
