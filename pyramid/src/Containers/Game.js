@@ -24,10 +24,14 @@ class Game extends Component{
         const height = pyramid_height;
         const structure_array = []
         for (let index = height; index > 0; index--) {
-            // Get Random card associated
-            let randomCard = this.state.card_list[Math.floor(Math.random()*this.state.card_list.length)];
-            const data = new Array(index).fill(["X",randomCard])
-            structure_array.push(data)
+            let row = []
+            for (let index_row = index; index_row > 0; index_row--) {
+                // Get Random card associated
+                let randomCard = this.state.card_list[Math.floor(Math.random()*this.state.card_list.length)];
+                row.push(["X",randomCard])
+            }
+            console.log(row)
+            structure_array.push(row)
         }
         this.setState({structure: structure_array})
     }
