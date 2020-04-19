@@ -1,2 +1,2 @@
 # Pyramid-Game
-Drink game
+Drinking game
