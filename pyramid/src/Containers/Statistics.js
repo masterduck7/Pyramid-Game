@@ -13,14 +13,28 @@ class Statistics extends Component{
     componentDidMount(){
         const users_data = JSON.parse(localStorage.getItem("users"))
         const user_drinks = []
-        users_data.forEach(user => {
-            const name = user["name"]
-            const drinks = localStorage.getItem(user["name"]+"_drinks")
-            user_drinks.push({"name": name, "drinks": drinks })
-        });
-        this.setState({
-            user_drinks: user_drinks
-        })
+        if (users_data){
+            users_data.forEach(user => {
+                const name = user["name"]
+                const drinks = localStorage.getItem(user["name"]+"_drinks")
+                user_drinks.push({"name": name, "drinks": drinks })
+            });
+            this.setState({
+                user_drinks: user_drinks
+            })
+        }
+    }
+
+    componentWillUnmount(){
+        // Clean localstorage
+        const users_data = JSON.parse(localStorage.getItem("users"))
+        if (users_data){
+            users_data.forEach(user => {
+                localStorage.removeItem(user.name+"_drinks")
+            })
+            localStorage.removeItem("pyramid_height")
+            localStorage.removeItem("users")
+        }
     }
 
     render(){
