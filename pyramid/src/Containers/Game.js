@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Button } from 'antd';
+import { Layout, Menu } from 'antd';
+import {Link} from 'react-router-dom';
+import logo from '../Assets/Drink.png';
 
 class Game extends Component{
 
@@ -103,7 +106,16 @@ class Game extends Component{
 
     render(){
         return(
+            <div>
+            <Layout>
+                <Menu theme="dark" mode="horizontal" style={{ lineHeight: '64px' }}>
+                    <Menu.Item><img alt="Movie" src={logo} height="60px" /></Menu.Item>
+                    <Menu.Item key="1"><Link to="/statistics">Terminar Juego</Link></Menu.Item>
+                </Menu>
+            </Layout>
+            <br />
             <center>{this.createTable()}</center>
+            </div>
         );
     }
 }

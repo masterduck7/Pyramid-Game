@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Styles from '../Assets/Styles';
 import { Field } from 'react-final-form';
 import Wizard from '../Components/Wizard';
+import CustomLayout from '../Containers/Layout';
 
 class SetupGame extends Component {
 
@@ -69,6 +70,9 @@ class SetupGame extends Component {
     render(){
         return(
             <div className="outer-div">
+            <CustomLayout />
+            <br />
+            <center><h1>Agregar jugadores:</h1></center>
             <Styles>
                 <Wizard onSubmit={this.onSubmit}>
                     <Wizard.Page>

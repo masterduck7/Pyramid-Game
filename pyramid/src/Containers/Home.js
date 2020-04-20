@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { Row, Col, Card, Timeline } from 'antd';
 import Example from '../Assets/Example.png';
+import CustomLayout from '../Containers/Layout';
 
 class Home extends Component {
     render(){
         return(
+            <div>
+            <CustomLayout />
+            <br />
+            <center><h1>Pirámide</h1></center>
             <Row>
             <Col xl={12} xs={20}>
                 <center><img alt="Example" src={Example} width="200px"></img></center>
@@ -26,6 +31,7 @@ class Home extends Component {
                 
             </Col>
             </Row>
+            </div>
         );
     }
 }
