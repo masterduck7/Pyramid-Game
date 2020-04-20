@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'antd';
 
 class Game extends Component{
 
@@ -8,7 +9,8 @@ class Game extends Component{
             card_list: ["A","2","3","4","5","6","7","8","9","10","J","Q","K"],
             users: [],
             pyramid_height: 1,
-            structure: []
+            structure: [],
+            remaining_cards: 0
         }
     }
     
@@ -22,17 +24,19 @@ class Game extends Component{
         const height = pyramid_height;
         const structure_array = []
         let type_card = false
+        let number_of_cards = 0
         for (let index = height; index > 0; index--) {
             let row = []
             for (let index_row = index; index_row > 0; index_row--) {
                 // Get Random card associated
                 let randomCard = this.state.card_list[Math.floor(Math.random()*this.state.card_list.length)];
                 row.push(["X", randomCard, type_card])
+                number_of_cards = number_of_cards + 1
             }
             type_card = !type_card
             structure_array.push(row)
         }
-        this.setState({structure: structure_array})
+        this.setState({structure: structure_array, number_of_cards: number_of_cards})
     }
     
     createTable(){
@@ -44,20 +48,24 @@ class Game extends Component{
             for (let j = 0; j < data.length; j++) {
                 const var_id = `${i}.${j}`
                 children.push(
-                    <button 
-                        onClick={() => this.playCard(data[j][1], data[j][2])}
+                    <Button 
+                        onClick={() => this.playCard(var_id,data[j][1], data[j][2])}
                         id = {var_id}
+                        key = {var_id}
+                        type = "danger"
+                        disabled = {false}
+                        ref = {(id) => id}
                     >
                         {data[j][0]}
-                    </button>
+                    </Button>
                 )
-          }
-          table.push(<p>{children}</p>)
+            }
+            table.push(<p key={i}>{children}</p>)
         }
         return table
     }
     
-    playCard(card, type_card){
+    playCard(id, card, type_card){
         const drink_users = []
         this.state.users.forEach(user => {
             if (user.cards.includes(card)) {
@@ -77,6 +85,19 @@ class Game extends Component{
             
         }else{
             alert("Nadie")
+        }
+
+        // Change number of remaining cards
+        this.setState({
+            number_of_cards: this.state.number_of_cards - 1
+        })
+
+        // Disable card
+        document.getElementById(id).disabled = true;
+
+        // Check is game is finished
+        if (this.state.number_of_cards === 1) {
+            window.location.href="/#/statistics"
         }
     }
 

@@ -35,7 +35,7 @@ class SetupGame extends Component {
         // Save All users in one to get total data
         const users_all_data = JSON.stringify(this.state.users);
         localStorage.setItem("users",users_all_data)
-        alert("START GAME");
+        window.location.href="/#/game"
     }
 
     // Dynamic form to add users
