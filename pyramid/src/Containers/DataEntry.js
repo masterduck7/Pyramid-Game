@@ -80,6 +80,7 @@ class SetupGame extends Component {
                             placeholder="Ingrese el nombre"
                             value={user.name}
                             onChange={this.handleUserNameChange(idx)}
+                            required
                             />
                             <button
                             type="button"
@@ -109,6 +110,8 @@ class SetupGame extends Component {
                             type="number"
                             placeholder="Ingrese altura de pirámide"
                             validate={this.required}
+                            pattern="^[1-9][0-9]*$"
+                            required
                         />
                         </div>
                     </Wizard.Page>

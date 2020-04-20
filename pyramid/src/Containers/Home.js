@@ -6,10 +6,10 @@ class Home extends Component {
     render(){
         return(
             <Row>
-            <Col span={12}>
-                <img alt="Example" src={Example} width="670px"></img>
+            <Col xl={12} xs={20}>
+                <center><img alt="Example" src={Example} width="200px"></img></center>
             </Col>
-            <Col span={12}>
+            <Col xl={12} xs={20}>
                 <br />
                 <h2>Pasos</h2>
                 <Timeline>
@@ -23,6 +23,7 @@ class Home extends Component {
                     <p>Se asignan 2 cartas al azar por jugador</p>
                     <p>Depende de la altura de la pirámide cuan dificil es</p>
                 </Card>
+                
             </Col>
             </Row>
         );
