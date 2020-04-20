@@ -30,7 +30,6 @@ class Game extends Component{
                 row.push(["X", randomCard, type_card])
             }
             type_card = !type_card
-            console.log(row)
             structure_array.push(row)
         }
         this.setState({structure: structure_array})
@@ -43,7 +42,15 @@ class Game extends Component{
             let children = []
             let data = structure[i]
             for (let j = 0; j < data.length; j++) {
-                children.push(<button onClick={() => this.playCard(data[j][1], data[j][2])}>{data[j][0]}</button>)
+                const var_id = `${i}.${j}`
+                children.push(
+                    <button 
+                        onClick={() => this.playCard(data[j][1], data[j][2])}
+                        id = {var_id}
+                    >
+                        {data[j][0]}
+                    </button>
+                )
           }
           table.push(<p>{children}</p>)
         }
