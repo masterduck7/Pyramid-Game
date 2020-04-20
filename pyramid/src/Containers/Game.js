@@ -21,13 +21,15 @@ class Game extends Component{
     setStructure(pyramid_height){
         const height = pyramid_height;
         const structure_array = []
+        let type_card = false
         for (let index = height; index > 0; index--) {
             let row = []
             for (let index_row = index; index_row > 0; index_row--) {
                 // Get Random card associated
                 let randomCard = this.state.card_list[Math.floor(Math.random()*this.state.card_list.length)];
-                row.push(["X",randomCard])
+                row.push(["X", randomCard, type_card])
             }
+            type_card = !type_card
             console.log(row)
             structure_array.push(row)
         }
@@ -41,26 +43,33 @@ class Game extends Component{
             let children = []
             let data = structure[i]
             for (let j = 0; j < data.length; j++) {
-                children.push(<button onClick={() => this.playCard(data[j][1])}>{data[j][0]}</button>)
+                children.push(<button onClick={() => this.playCard(data[j][1], data[j][2])}>{data[j][0]}</button>)
           }
           table.push(<p>{children}</p>)
         }
         return table
     }
     
-    playCard(card){
+    playCard(card, type_card){
         const drink_users = []
         this.state.users.forEach(user => {
             if (user.cards.includes(card)) {
                 drink_users.push(user.name)
-                const drinks_user = localStorage.getItem(user.name+"_drinks")
-                localStorage.setItem(user.name+"_drinks", parseInt(drinks_user) + 1)
+                if (type_card) {
+                    const drinks_user = localStorage.getItem(user.name+"_drinks")
+                    localStorage.setItem(user.name+"_drinks", parseInt(drinks_user) + 1)    
+                }                
             }
         });
         if (drink_users.length > 0) {
-            alert("Beben: " + drink_users.join(", "))
+            if (type_card) {
+                alert("Beben: " + drink_users.join(", "))    
+            }else{
+                alert("Regalan: " + drink_users.join(", "))
+            }
+            
         }else{
-            alert("Nadie bebe")
+            alert("Nadie")
         }
     }
 
