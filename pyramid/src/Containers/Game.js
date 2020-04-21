@@ -11,7 +11,11 @@ class Game extends Component{
     constructor(state){
         super(state)
         this.state = {
-            card_list: ["A","2","3","4","5","6","7","8","9","10","J","Q","K"],
+            card_options: ["A","2","3","4","5","6","7","8","9","10","J","Q","K"],
+            card_list: ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J","Q", "K",
+            "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q","K",
+            "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K",
+            "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"],
             users: [],
             pyramid_height: 1,
             structure: [],
@@ -27,20 +31,40 @@ class Game extends Component{
 
     setStructure(pyramid_height){
         const height = pyramid_height;
-        const structure_array = []
-        let type_card = false
-        let number_of_cards = 0
+        const structure_array = [];
+        let type_card = false;
+        let number_of_cards = 0;
+        let card_list = this.state.card_list;
         for (let index = height; index > 0; index--) {
             let row = []
             for (let index_row = index; index_row > 0; index_row--) {
                 // Get Random card associated
-                let randomCard = this.state.card_list[Math.floor(Math.random()*this.state.card_list.length)];
+                let randomCard = card_list[Math.floor(Math.random()*card_list.length)];
                 row.push(["X", randomCard, type_card])
                 number_of_cards = number_of_cards + 1
+                // Remove cards from list
+                const new_card_list = card_list;
+                for (let index = 0; index < new_card_list.length; index++) {
+                    if ( randomCard === new_card_list[index] ) {
+                        delete new_card_list[index]
+                        break
+                    }
+                }
+                // Remove undefined items
+                const new_card_list_clean = []
+                for (let index = 0; index < new_card_list.length; index++) {
+                    if ( new_card_list[index] !== undefined ) {
+                        new_card_list_clean.push(new_card_list[index])
+                    }
+                }
+                card_list = new_card_list_clean
             }
             type_card = !type_card
             structure_array.push(row)
         }
+        this.setState({
+            card_list: card_list
+        })
         this.setState({structure: structure_array, number_of_cards: number_of_cards})
     }
     
