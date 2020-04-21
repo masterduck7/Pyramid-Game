@@ -10,23 +10,14 @@ class SetupGame extends Component {
         super(props)
         this.state = {
             card_options: ["A","2","3","4","5","6","7","8","9","10","J","Q","K"],
-            card_list: [],
+            card_list: ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J","Q", "K",
+            "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q","K",
+            "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K",
+            "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"],
             number_users : 1,
             pyramid_height : 0,
             users: [{ name: "", cards: ["",""], drinks: 0 }]
         }
-    }
-
-    componentWillMount(){
-        const cards = [];
-        for (let i = 0; i < 4; i++){
-            for (let j = 0; j < 13; j++) {
-                cards.push(this.state.card_options[j])
-            }
-        }
-        this.setState({
-            card_list: cards
-        })
     }
 
     // Wizard functions
