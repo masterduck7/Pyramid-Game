@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'antd';
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Card, Button, List, Col, Row } from 'antd';
 import {Link} from 'react-router-dom';
 import logo from '../Assets/Drink.png';
 
@@ -141,8 +140,25 @@ class Game extends Component{
                     </Menu>
                 </Header>
             </Layout>
-            <br />
-            <center>{this.createTable()}</center>
+            <Row>
+                <Col xs={2} sm={4} md={6} lg={8} xl={8}>
+                <br />
+                <Card style={{ width: 200, textAlign :"center", fontWeight: "bold" }}>Jugadores</Card>
+                <List
+                        itemLayout="horizontal"
+                        dataSource={this.state.users}
+                        style={{ width: 200 }}
+                        renderItem={item => (
+                            <Card size="small" bodyStyle={{height: 40, textAlign :"center"}}>{item.name}</Card>
+                        )}
+                />
+                
+                </Col>
+                <Col xs={2} sm={4} md={6} lg={8} xl={8}>
+                    <br />
+                    <center>{this.createTable()}</center>
+                </Col>
+            </Row>
             </div>
         );
     }
