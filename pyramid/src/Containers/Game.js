@@ -140,16 +140,16 @@ class Game extends Component{
                     </Menu>
                 </Header>
             </Layout>
-            <Row>
+            <Row style={{paddingLeft : 20}}>
                 <Col xs={2} sm={4} md={6} lg={8} xl={8}>
                 <br />
-                <Card style={{ width: 200, textAlign :"center", fontWeight: "bold" }}>Jugadores</Card>
+                <Card style={{ backgroundColor:"#001529", color:"#8C8C8C", top:-10, height:60, width: 300, textAlign :"center", fontWeight: "bold" }}>Jugadores</Card>
                 <List
                         itemLayout="horizontal"
                         dataSource={this.state.users}
-                        style={{ width: 200 }}
+                        style={{ width: 300 }}
                         renderItem={item => (
-                            <Card size="small" bodyStyle={{height: 40, textAlign :"center"}}><strong>{item.name}:  </strong>  {item.cards[0]} , {item.cards[1]}</Card>
+                            <Card size="small" bodyStyle={{ backgroundColor:"#FF4D4F", height: 40}}><strong>{item.name}:  </strong>  {item.cards[0]} , {item.cards[1]}</Card>
                         )}
                 />
                 
