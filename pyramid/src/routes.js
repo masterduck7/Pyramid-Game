@@ -5,13 +5,10 @@ import Home from './Containers/Home';
 import DataEntry from './Containers/DataEntry';
 import Game from './Containers/Game';
 import Statistics from './Containers/Statistics';
-import CustomLayout from './Containers/Layout';
 
 const BaseRouter = () => (
     <div>
         <HashRouter basename='/'>
-            <CustomLayout />
-            <br />
             <Switch>
                 <Route exact path='/' component={Home} />
                 <Route exact path='/setup-game' component={DataEntry} />

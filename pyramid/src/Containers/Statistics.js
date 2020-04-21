@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { List, Card } from 'antd';
+import CustomLayout from '../Containers/Layout';
 
 class Statistics extends Component{
 
@@ -39,6 +40,10 @@ class Statistics extends Component{
 
     render(){
         return(
+            <div>
+            <CustomLayout />
+            <br />
+            <center><h1>Estadísticas</h1></center>
             <List
                 style={{ marginLeft:"5%", marginRight:"5%" }}
                 grid={{ gutter: 16, column: 4 }}
@@ -49,6 +54,7 @@ class Statistics extends Component{
                     </List.Item>
                 )}
             />
+            </div>
         );
     }
 }

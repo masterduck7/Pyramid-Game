@@ -67,13 +67,13 @@ class Wizard extends Component {
             <div className="buttons">
               {page > 0 && (
                 <button type="button" onClick={this.previous}>
-                  « Previous
+                  « Atrás
                 </button>
               )}
-              {!isLastPage && <button type="submit">Next »</button>}
+              {!isLastPage && <button type="submit">Siguiente</button>}
               {isLastPage && (
                 <button type="submit" disabled={submitting}>
-                  Submit
+                  Jugar
                 </button>
               )}
             </div>
