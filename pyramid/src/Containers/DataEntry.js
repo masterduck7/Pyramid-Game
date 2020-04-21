@@ -60,35 +60,40 @@ class SetupGame extends Component {
     };
 
     handleAddUser = () => {
-        const randomCard1 = this.state.card_list[Math.floor(Math.random()*this.state.card_list.length)];
-        const randomCard2 = this.state.card_list[Math.floor(Math.random()*this.state.card_list.length)];
-        this.setState({
-            users: this.state.users.concat([{ name: "", cards: [randomCard1,randomCard2], drinks: 0 }])
-        });
-        // Remove cards from list
-        const new_card_list = this.state.card_list;
-        for (let index = 0; index < new_card_list.length; index++) {
-            if ( randomCard1 === new_card_list[index] ) {
-                delete new_card_list[index]
-                break
-            }
+        if (this.state.card_list.length === 48){
+            alert("No quedan más cartas")
         }
-        for (let index = 0; index < new_card_list.length; index++) {
-            if ( randomCard2 === new_card_list[index] ) {
-                delete new_card_list[index]
-                break
+        else{
+            const randomCard1 = this.state.card_list[Math.floor(Math.random()*this.state.card_list.length)];
+            const randomCard2 = this.state.card_list[Math.floor(Math.random()*this.state.card_list.length)];
+            this.setState({
+                users: this.state.users.concat([{ name: "", cards: [randomCard1,randomCard2], drinks: 0 }])
+            });
+            // Remove cards from list
+            const new_card_list = this.state.card_list;
+            for (let index = 0; index < new_card_list.length; index++) {
+                if ( randomCard1 === new_card_list[index] ) {
+                    delete new_card_list[index]
+                    break
+                }
             }
-        }
-        // Remove undefined items
-        const new_card_list_clean = []
-        for (let index = 0; index < new_card_list.length; index++) {
-            if ( new_card_list[index] !== undefined ) {
-                new_card_list_clean.push(new_card_list[index])
+            for (let index = 0; index < new_card_list.length; index++) {
+                if ( randomCard2 === new_card_list[index] ) {
+                    delete new_card_list[index]
+                    break
+                }
             }
+            // Remove undefined items
+            const new_card_list_clean = []
+            for (let index = 0; index < new_card_list.length; index++) {
+                if ( new_card_list[index] !== undefined ) {
+                    new_card_list_clean.push(new_card_list[index])
+                }
+            }
+            this.setState({
+                card_list: new_card_list_clean
+            })
         }
-        this.setState({
-            card_list: new_card_list_clean
-        })
     };
 
     handleRemoveUser = idx => () => {
@@ -144,7 +149,7 @@ class SetupGame extends Component {
                             type="number"
                             placeholder="Ingrese altura de pirámide"
                             validate={this.required}
-                            pattern="^[1-9][0-9]*$"
+                            pattern="[1-9]|10"
                             required
                         />
                         </div>
