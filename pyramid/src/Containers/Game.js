@@ -4,6 +4,8 @@ import { Layout, Menu } from 'antd';
 import {Link} from 'react-router-dom';
 import logo from '../Assets/Drink.png';
 
+const { Header } = Layout;
+
 class Game extends Component{
 
     constructor(state){
@@ -107,11 +109,13 @@ class Game extends Component{
     render(){
         return(
             <div>
-            <Layout>
-                <Menu theme="dark" mode="horizontal" style={{ lineHeight: '64px' }}>
-                    <Menu.Item><img alt="Movie" src={logo} height="60px" /></Menu.Item>
-                    <Menu.Item key="1"><Link to="/statistics">Terminar Juego</Link></Menu.Item>
-                </Menu>
+            <Layout className="layout">
+                <Header>
+                    <Menu theme="dark" mode="horizontal" style={{ lineHeight: '64px' }}>
+                        <Menu.Item><img alt="Movie" src={logo} height="60px" /></Menu.Item>
+                        <Menu.Item key="1"><Link to="/statistics">Terminar Juego</Link></Menu.Item>
+                    </Menu>
+                </Header>
             </Layout>
             <br />
             <center>{this.createTable()}</center>
