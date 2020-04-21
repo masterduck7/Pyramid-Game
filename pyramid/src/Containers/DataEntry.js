@@ -9,11 +9,24 @@ class SetupGame extends Component {
     constructor(props){
         super(props)
         this.state = {
-            card_list: ["A","2","3","4","5","6","7","8","9","10","J","Q","K"],
+            card_options: ["A","2","3","4","5","6","7","8","9","10","J","Q","K"],
+            card_list: [],
             number_users : 1,
             pyramid_height : 0,
             users: [{ name: "", cards: ["",""], drinks: 0 }]
         }
+    }
+
+    componentWillMount(){
+        const cards = [];
+        for (let i = 0; i < 4; i++){
+            for (let j = 0; j < 13; j++) {
+                cards.push(this.state.card_options[j])
+            }
+        }
+        this.setState({
+            card_list: cards
+        })
     }
 
     // Wizard functions
@@ -43,8 +56,10 @@ class SetupGame extends Component {
     // https://goshakkk.name/array-form-inputs/
 
     handleUserNameChange = idx => evt => {
+        // Get Random Card
         const randomCard1 = this.state.card_list[Math.floor(Math.random()*this.state.card_list.length)];
         const randomCard2 = this.state.card_list[Math.floor(Math.random()*this.state.card_list.length)];
+        // Set users
         const newUsers = this.state.users.map((user, sidx) => {
             if (idx !== sidx) return user;
             return { ...user, name: evt.target.value, cards: [randomCard1,randomCard2], drinks: 0 };
@@ -59,6 +74,30 @@ class SetupGame extends Component {
         this.setState({
             users: this.state.users.concat([{ name: "", cards: [randomCard1,randomCard2], drinks: 0 }])
         });
+        // Remove cards from list
+        const new_card_list = this.state.card_list;
+        for (let index = 0; index < new_card_list.length; index++) {
+            if ( randomCard1 === new_card_list[index] ) {
+                delete new_card_list[index]
+                break
+            }
+        }
+        for (let index = 0; index < new_card_list.length; index++) {
+            if ( randomCard2 === new_card_list[index] ) {
+                delete new_card_list[index]
+                break
+            }
+        }
+        // Remove undefined items
+        const new_card_list_clean = []
+        for (let index = 0; index < new_card_list.length; index++) {
+            if ( new_card_list[index] !== undefined ) {
+                new_card_list_clean.push(new_card_list[index])
+            }
+        }
+        this.setState({
+            card_list: new_card_list_clean
+        })
     };
 
     handleRemoveUser = idx => () => {
