@@ -60,7 +60,7 @@ class SetupGame extends Component {
     };
 
     handleAddUser = () => {
-        if (this.state.card_list.length === 48){
+        if (this.state.card_list.length === 0){
             alert("No quedan más cartas")
         }
         else{

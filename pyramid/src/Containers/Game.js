@@ -149,7 +149,7 @@ class Game extends Component{
                         dataSource={this.state.users}
                         style={{ width: 200 }}
                         renderItem={item => (
-                            <Card size="small" bodyStyle={{height: 40, textAlign :"center"}}>{item.name}</Card>
+                            <Card size="small" bodyStyle={{height: 40, textAlign :"center"}}><strong>{item.name}:  </strong>  {item.cards[0]} , {item.cards[1]}</Card>
                         )}
                 />
                 
