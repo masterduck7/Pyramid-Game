@@ -5,7 +5,7 @@ const btn = (light, dark) => css`
   display: inline-block;
   border-radius: 5px;
   padding: 5px 15px;
-  font-size: 16px;
+  font-size: 14px;
   color: white;
   &:visited {
     color: white;
@@ -68,8 +68,8 @@ export default styled.div`
 
   form {
     max-width: 500px;
-    margin: 10px auto;
-    padding: 20px;
+    margin: 5px auto;
+    padding: 5px;
     position: relative;
 
     .loading {
@@ -137,7 +137,8 @@ export default styled.div`
       display: flex;
       flex-flow: row nowrap;
       justify-content: center;
-      margin-top: 15px;
+      margin-top: 10px;
+      margin-right: 100px;
     }
 
     .error {
@@ -156,7 +157,7 @@ export default styled.div`
     }
   }
   button {
-    margin: 0 10px;
+    margin: 0 28px;
     &[type='submit'] {
       ${btnPrimary};
     }

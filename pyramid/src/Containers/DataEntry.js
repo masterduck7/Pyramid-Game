@@ -60,7 +60,7 @@ class SetupGame extends Component {
     };
 
     handleAddUser = () => {
-        if (this.state.card_list.length === 48){
+        if (this.state.card_list.length === 0){
             alert("No quedan más cartas")
         }
         else{
@@ -107,7 +107,7 @@ class SetupGame extends Component {
             <div className="outer-div">
             <CustomLayout />
             <br />
-            <center><h1>Agregar jugadores:</h1></center>
+            <center><h1>Agregar jugadores (1-26):</h1></center>
             <Styles>
                 <Wizard onSubmit={this.onSubmit}>
                     <Wizard.Page>
@@ -142,7 +142,7 @@ class SetupGame extends Component {
                     </Wizard.Page>
                     <Wizard.Page>
                         <div>
-                        <label>Altura Pirámide</label>
+                        <label>Altura Pirámide (1-10)</label>
                         <Field
                             name="pyramid_height"
                             component="input"
