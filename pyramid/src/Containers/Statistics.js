@@ -35,6 +35,7 @@ class Statistics extends Component{
             })
             localStorage.removeItem("pyramid_height")
             localStorage.removeItem("users")
+            localStorage.removeItem("hard")
         }
     }
 

@@ -16,7 +16,8 @@ class SetupGame extends Component {
             "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"],
             number_users : 1,
             pyramid_height : 0,
-            users: [{ name: "", cards: ["",""], drinks: 0 }]
+            users: [{ name: "", cards: ["",""], drinks: 0 }],
+            hard: false
         }
     }
 
@@ -32,6 +33,7 @@ class SetupGame extends Component {
         })
         // Save Data on Local Storage
         localStorage.setItem("pyramid_height",values.pyramid_height)
+        localStorage.setItem("hard",this.state.hard)
         // Save individual user drinks to easy access and set value
         const users_data = this.state.users
         users_data.forEach(user => {
@@ -107,10 +109,11 @@ class SetupGame extends Component {
             <div className="outer-div">
             <CustomLayout />
             <br />
-            <center><h1>Agregar jugadores (1-26):</h1></center>
+            <center><h1>Ingrese datos:</h1></center>
             <Styles>
                 <Wizard onSubmit={this.onSubmit}>
                     <Wizard.Page>
+                    <label>Jugadores</label>
                     <form>
                         {this.state.users.map((user, idx) => (
                         <div className="inner-div" key={idx}>
@@ -151,6 +154,18 @@ class SetupGame extends Component {
                             validate={this.required}
                             pattern="[1-9]|10"
                             required
+                        />
+                        </div>
+                    </Wizard.Page>
+                    <Wizard.Page>
+                        <div>
+                        <label>Modo dificil</label>
+                        <input
+                            name="hard"
+                            type="checkbox"
+                            onChange={() => this.setState({hard:!this.state.hard})}
+                            checked={this.state.hard}
+                            validate={this.required}
                         />
                         </div>
                     </Wizard.Page>

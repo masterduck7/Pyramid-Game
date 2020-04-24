@@ -25,46 +25,77 @@ class Game extends Component{
     componentDidMount(){
         this.setState({pyramid_height: JSON.parse(localStorage.getItem("pyramid_height"))});
         this.setState({users: JSON.parse(localStorage.getItem("users"))});
-        this.setStructure(JSON.parse(localStorage.getItem("pyramid_height")));
+        const card_user_assigned = this.getUserCards(JSON.parse(localStorage.getItem("users")))
+        this.setStructure(JSON.parse(localStorage.getItem("pyramid_height")), JSON.parse(localStorage.getItem("hard")), card_user_assigned);
     }
 
-    setStructure(pyramid_height){
-        const height = pyramid_height;
-        const structure_array = [];
-        let type_card = false;
-        let number_of_cards = 0;
-        let card_list = this.state.card_list;
-        for (let index = height; index > 0; index--) {
-            let row = []
-            for (let index_row = index; index_row > 0; index_row--) {
-                // Get Random card associated
-                let randomCard = card_list[Math.floor(Math.random()*card_list.length)];
-                row.push(["X", randomCard, type_card])
-                number_of_cards = number_of_cards + 1
-                // Remove cards from list
-                const new_card_list = card_list;
-                for (let index = 0; index < new_card_list.length; index++) {
-                    if ( randomCard === new_card_list[index] ) {
-                        delete new_card_list[index]
-                        break
-                    }
-                }
-                // Remove undefined items
-                const new_card_list_clean = []
-                for (let index = 0; index < new_card_list.length; index++) {
-                    if ( new_card_list[index] !== undefined ) {
-                        new_card_list_clean.push(new_card_list[index])
-                    }
-                }
-                card_list = new_card_list_clean
+    getUserCards(users){
+        let card_user = []
+        users.forEach(user => {
+            for (let index = 0; index < user.cards.length; index++) {
+                card_user.push(user.cards[index])
             }
-            type_card = !type_card
-            structure_array.push(row)
+        });
+        return card_user
+    }
+
+    setStructure(pyramid_height, hard, user_cards){
+        if (hard) {
+            const height = pyramid_height;
+            const structure_array = [];
+            let type_card = false;
+            let number_of_cards = 0;
+            let card_list = user_cards;
+            for (let index = height; index > 0; index--) {
+                let row = []
+                for (let index_row = index; index_row > 0; index_row--) {
+                    // Get Random card associated
+                    let randomCard = card_list[Math.floor(Math.random()*card_list.length)];
+                    row.push(["X", randomCard, type_card])
+                    number_of_cards = number_of_cards + 1
+                }
+                type_card = !type_card
+                structure_array.push(row)
+            }
+            this.setState({structure: structure_array, number_of_cards: number_of_cards})
+        }else{
+            const height = pyramid_height;
+            const structure_array = [];
+            let type_card = false;
+            let number_of_cards = 0;
+            let card_list = this.state.card_list;
+            for (let index = height; index > 0; index--) {
+                let row = []
+                for (let index_row = index; index_row > 0; index_row--) {
+                    // Get Random card associated
+                    let randomCard = card_list[Math.floor(Math.random()*card_list.length)];
+                    row.push(["X", randomCard, type_card])
+                    number_of_cards = number_of_cards + 1
+                    // Remove cards from list
+                    const new_card_list = card_list;
+                    for (let index = 0; index < new_card_list.length; index++) {
+                        if ( randomCard === new_card_list[index] ) {
+                            delete new_card_list[index]
+                            break
+                        }
+                    }
+                    // Remove undefined items
+                    const new_card_list_clean = []
+                    for (let index = 0; index < new_card_list.length; index++) {
+                        if ( new_card_list[index] !== undefined ) {
+                            new_card_list_clean.push(new_card_list[index])
+                        }
+                    }
+                    card_list = new_card_list_clean
+                }
+                type_card = !type_card
+                structure_array.push(row)
+            }
+            this.setState({
+                card_list: card_list
+            })
+            this.setState({structure: structure_array, number_of_cards: number_of_cards})
         }
-        this.setState({
-            card_list: card_list
-        })
-        this.setState({structure: structure_array, number_of_cards: number_of_cards})
     }
     
     createTable(){

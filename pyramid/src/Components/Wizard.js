@@ -55,6 +55,7 @@ class Wizard extends Component {
     const { page, values } = this.state
     const activePage = React.Children.toArray(children)[page]
     const isLastPage = page === React.Children.count(children) - 1
+    const isFirstPage = page === 0
     return (
       <Form
         initialValues={values}
@@ -70,7 +71,7 @@ class Wizard extends Component {
                   « Atrás
                 </button>
               )}
-              {!isLastPage && <button type="submit">Siguiente</button>}
+              {!isLastPage && !isFirstPage && <button type="submit">Siguiente</button>}
               {isLastPage && (
                 <button type="submit" disabled={submitting}>
                   Jugar
