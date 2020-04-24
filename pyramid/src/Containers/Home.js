@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Card, Timeline } from 'antd';
 import Example from '../Assets/Example.png';
 import CustomLayout from '../Containers/Layout';
+import CustomFooter from '../Containers/Footer';
 
 class Home extends Component {
     render(){
@@ -31,6 +32,9 @@ class Home extends Component {
                 
             </Col>
             </Row>
+            <br />
+            <br />
+            <CustomFooter />
             </div>
         );
     }

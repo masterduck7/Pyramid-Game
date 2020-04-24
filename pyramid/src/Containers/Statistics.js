@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { List, Card } from 'antd';
 import CustomLayout from '../Containers/Layout';
+import CustomFooter from '../Containers/Footer';
 
 class Statistics extends Component{
 
@@ -55,6 +56,9 @@ class Statistics extends Component{
                     </List.Item>
                 )}
             />
+            <br />
+            <br />
+            <CustomFooter />
             </div>
         );
     }

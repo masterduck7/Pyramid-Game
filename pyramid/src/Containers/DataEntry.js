@@ -3,6 +3,7 @@ import Styles from '../Assets/Styles';
 import { Field } from 'react-final-form';
 import Wizard from '../Components/Wizard';
 import CustomLayout from '../Containers/Layout';
+import CustomFooter from '../Containers/Footer';
 
 class SetupGame extends Component {
 
@@ -172,6 +173,9 @@ class SetupGame extends Component {
                     </Wizard.Page>
                 </Wizard>
             </Styles>
+            <br />
+            <br />
+            <CustomFooter />
             </div>
         );
     }
