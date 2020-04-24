@@ -120,6 +120,7 @@ class SetupGame extends Component {
                             <input
                             type="text"
                             placeholder="Ingrese el nombre"
+                            pattern="[a-zA-Z]*"
                             value={user.name}
                             onChange={this.handleUserNameChange(idx)}
                             required
