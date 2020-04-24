@@ -18,7 +18,9 @@ class Game extends Component{
             users: [],
             pyramid_height: 1,
             structure: [],
-            remaining_cards: 0
+            remaining_cards: 0,
+            disabledButtons: [],
+            playedButtons: []
         }
     }
     
@@ -27,6 +29,7 @@ class Game extends Component{
         this.setState({users: JSON.parse(localStorage.getItem("users"))});
         const card_user_assigned = this.getUserCards(JSON.parse(localStorage.getItem("users")))
         this.setStructure(JSON.parse(localStorage.getItem("pyramid_height")), JSON.parse(localStorage.getItem("hard")), card_user_assigned);
+        this.state.disabledButtons.push(`${0}.${0}`)
     }
 
     getUserCards(users){
@@ -40,9 +43,9 @@ class Game extends Component{
     }
 
     setStructure(pyramid_height, hard, user_cards){
+        const structure_array = [];
         if (hard) {
             const height = pyramid_height;
-            const structure_array = [];
             let type_card = false;
             let number_of_cards = 0;
             let card_list = user_cards;
@@ -60,7 +63,6 @@ class Game extends Component{
             this.setState({structure: structure_array, number_of_cards: number_of_cards})
         }else{
             const height = pyramid_height;
-            const structure_array = [];
             let type_card = false;
             let number_of_cards = 0;
             let card_list = this.state.card_list;
@@ -96,6 +98,19 @@ class Game extends Component{
             })
             this.setState({structure: structure_array, number_of_cards: number_of_cards})
         }
+        let card_list = []
+        for (let i = 0; i < structure_array.length; i += 1) {
+        for (let j = 0; j < structure_array[i].length; j += 1) {
+            if (i === 0 && j === 0) {
+                continue
+            }else{
+                card_list.push(`${i}.${j}`)
+            }
+        }
+        }
+        this.setState({
+            disabledButtons: card_list
+        })
     }
     
     createTable(){
@@ -112,7 +127,7 @@ class Game extends Component{
                         id = {var_id}
                         key = {var_id}
                         type = "danger"
-                        disabled = {false}
+                        disabled = {this.isDisabled(var_id)}
                         ref = {(id) => id}
                     >
                         {data[j][0]}
@@ -152,13 +167,31 @@ class Game extends Component{
         })
 
         // Disable card
-        document.getElementById(id).disabled = true;
+        const playedCard = this.state.playedButtons.push(id)
+        const removeCard = this.state.disabledButtons.shift()
+        this.setState({
+            playCard: playedCard,
+            removeCard: removeCard
+        })
 
         // Check is game is finished
         if (this.state.number_of_cards === 1) {
             window.location.href="/#/statistics"
         }
     }
+
+    isDisabled(id){
+        if (this.state.playedButtons.includes(id) ) {
+          return true
+        }
+        else{
+          if (this.state.disabledButtons.includes(id)) {
+            return true
+          }else{
+            return false
+          }
+        }
+      }
 
     render(){
         return(
