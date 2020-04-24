@@ -123,7 +123,7 @@ class Game extends Component{
                 const var_id = `${i}.${j}`
                 children.push(
                     <Button 
-                        onClick={() => this.playCard(var_id,data[j][1], data[j][2])}
+                        onClick={() => this.playCard(i,var_id,data[j][1], data[j][2])}
                         id = {var_id}
                         key = {var_id}
                         type = "danger"
@@ -139,22 +139,22 @@ class Game extends Component{
         return table
     }
     
-    playCard(id, card, type_card){
+    playCard(nDrinks, id, card, type_card){
         const drink_users = []
         this.state.users.forEach(user => {
             if (user.cards.includes(card)) {
                 drink_users.push(user.name)
                 if (type_card) {
                     const drinks_user = localStorage.getItem(user.name+"_drinks")
-                    localStorage.setItem(user.name+"_drinks", parseInt(drinks_user) + 1)    
+                    localStorage.setItem(user.name+"_drinks", parseInt(drinks_user) + (nDrinks + 1))    
                 }                
             }
         });
         if (drink_users.length > 0) {
             if (type_card) {
-                alert("Beben: " + drink_users.join(", "))    
+                alert("Beben "+ (nDrinks + 1) + " tragos: " + drink_users.join(", "))    
             }else{
-                alert("Regalan: " + drink_users.join(", "))
+                alert("Regalan "+ (nDrinks + 1) + " tragos: " + drink_users.join(", "))
             }
             
         }else{
